@@ -1,0 +1,9 @@
+pt-BR:
+  homepage:
+    welcome: "Estimativas ágeis sem complicação"
+    description: "Crie uma sala, convide sua equipe e comece a votar em tempo real. Sem login, sem burocracia."
+    create_room: "Criar nova sala"
+  footer:
+    footer: "© 2025 YAPP. Todos os direitos reservados."
+    contact: "Contate-me"
+    follow_us: "Siga-me nas redes sociais:"

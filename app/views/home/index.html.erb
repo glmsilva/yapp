@@ -1,0 +1,17 @@
+<%= render "application/navbar" %>
+
+<div class="hero bg-base-200 min-h-dvh">
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    <img src="https://placehold.co/600x400/EEE/31343C"
+      class="max-w-sm rounded-lg shadow-2xl">
+    <div>
+      <h1 class="text-5xl font-bold"><%= t("homepage.welcome") %></h1>
+      <p class="py-6">
+        <%= t("homepage.description") %>
+      </p>
+    <button class="btn btn-primary" onclick="new_room.showModal()"><%= t("homepage.create_room") %></button>
+    </div>
+  </div>
+</div>
+
+<%= render "application/footer" %>
