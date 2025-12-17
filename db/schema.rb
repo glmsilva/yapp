@@ -11,13 +11,23 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.2].define(version: 2025_12_16_011229) do
-# Could not dump table "players" because of following StandardError
-#   Unknown type 'uuid' for column 'room_id'
+  create_table "players", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.integer "role"
+    t.string "room_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_players_on_room_id"
+  end
 
-
-# Could not dump table "rooms" because of following StandardError
-#   Unknown type 'uuid' for column 'id'
-
+  create_table "rooms", id: :string, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "deck_type"
+    t.string "slug_name", null: false
+    t.integer "status", default: 0
+    t.datetime "updated_at", null: false
+    t.index ["slug_name"], name: "index_rooms_on_slug_name", unique: true
+  end
 
   create_table "votes", force: :cascade do |t|
     t.datetime "created_at", null: false
