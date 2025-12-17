@@ -8,6 +8,14 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1 or /rooms/1.json
   def show
+    @current_player = @room.players.find_by(id: session[:player_id])
+    if @current_player
+      @players = @room.players.includes(:vote)
+      render :show
+    else
+      @player = Player.new
+      render :join_screen
+    end
   end
 
   # GET /rooms/new
@@ -26,6 +34,7 @@ class RoomsController < ApplicationController
 
     respond_to do |format|
       if @room.save
+        session[:player_id] = @player.id
         format.html { redirect_to @room, notice: "Room was successfully created." }
         format.json { render :show, status: :created, location: @room }
       else
@@ -61,7 +70,7 @@ class RoomsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_room
-      @room = Room.find(params.expect(:id))
+      @room = Room.find_by!(slug_name: params[:slug_name])
     end
 
     # Only allow a list of trusted parameters through.

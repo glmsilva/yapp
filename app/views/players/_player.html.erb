@@ -1,0 +1,41 @@
+<div id="<%= dom_id player %>" class="flex flex-col items-center animate-fade-in">
+
+  <div class="relative w-24 h-36 rounded-xl flex items-center justify-center shadow-lg transition-all duration-300
+    <%= if player.vote
+          if player.room.revealed?
+             "bg-white text-slate-900 border-4 border-indigo-500 transform rotate-y-180" # Estado Revelado
+          else
+             "bg-indigo-600 border-4 border-indigo-400" # Estado Votado (Verso)
+          end
+        else
+          "bg-slate-800/50 border-2 border-dashed border-slate-600" # Estado Aguardando
+        end
+    %>">
+
+    <% if player.room.revealed? && player.vote %>
+      <span class="text-3xl font-bold"><%= player.vote.value %></span>
+    <% elsif player.vote %>
+       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-10 h-10 opacity-50"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+    <% else %>
+       <div class="w-8 h-8 rounded-full bg-slate-700/50"></div>
+    <% end %>
+
+  </div>
+
+  <div class="mt-3 text-center">
+    <p class="font-medium text-sm <%= player == @current_player ? 'text-indigo-400' : 'text-slate-200' %>">
+      <%= player.name %>
+      <% if player.moderator? %>
+        <span class="text-amber-500 ml-1" title="Moderador">★</span>
+      <% end %>
+    </p>
+
+    <p class="text-xs text-slate-500 mt-1">
+      <% if player.vote %>
+        <%= room.revealed? ? "Votou #{player.vote.value}" : "Pronto" %>
+      <% else %>
+        Pensando...
+      <% end %>
+    </p>
+  </div>
+</div>
